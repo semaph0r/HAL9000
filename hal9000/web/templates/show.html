@@ -6,22 +6,35 @@
             <div class="card">
                 <div class="card-header" id="certificate-{{ certificate.id }}-heading">
                     <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#body-certificate-{{ certificate.id }}" aria-expanded="true" aria-controls="body-certificate-{{ certificate.id }}">
-                            {{ certificate.domain }}<span class="badge badge-success status-badge">{{ certificate.status }}</span>
+                        <button class="btn btn-link btn-block text-left certificate-title" type="button"
+                                data-toggle="collapse"
+                                data-target="#body-certificate-{{ certificate.id }}" aria-expanded="true"
+                                aria-controls="body-certificate-{{ certificate.id }}"><span
+                                class="badge badge-success status-badge">{{ certificate.status }}</span>
+                            {{ certificate.domain }}
                         </button>
                     </h2>
                 </div>
 
-                <div id="#body-certificate-{{ certificate.id }}" class="collapse show" aria-labelledby="certificate-{{ certificate.id }}-heading"
+                <div id="#body-certificate-{{ certificate.id }}" class="collapse show"
+                     aria-labelledby="certificate-{{ certificate.id }}-heading"
                      data-parent="#accordionCertificates">
                     <div class="card-body">
                         <ul>
                             <li>Maintainer: {{ certificate.maintainer }}</li>
-                            <li>Notification: {{ certificate.notified_at }}</li>
+                            <li>Notification: {{ certificate.send_notification | yesno:"Enabled,Disabled" }}</li>
                             <li>Acknowledgement: {{ certificate.acknowledged_at }}</li>
                         </ul>
-                        <button class="btn btn-warning" type="button">Acknowledge</button>
+                        <!-- Default switch -->
+                        <!--<div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="customSwitches{{ certificate.id }}">
+                            <label class="custom-control-label" for="customSwitches{{ certificate.id }}">Toggle this switch element</label>
+                        </div>-->
+                        <a class="btn btn-warning btn-sm" href="#" role="button">Acknowledge</a>
+                        <a class="btn btn-primary btn-sm edit" href="{% url 'update-certificate' pk=certificate.id %}" role="button">Edit</a>
+                        <a class="btn btn-danger btn-sm edit" href="{% url 'delete-certificate' pk=certificate.id %}"
+                           role="button">Delete</a>
+
                     </div>
                 </div>
             </div>
@@ -29,28 +42,28 @@
     </div>
     <h2>Software</h2>
     <div class="accordion" id="accordionSoftware">
-            <div class="card">
-                <div class="card-header" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Collapsible Group Item #1
-                        </button>
-                    </h2>
-                </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Collapsible Group Item #1
+                    </button>
+                </h2>
+            </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingTwo"
-                     data-parent="#accordionSoftware">
-                    <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-                        laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
-                        coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
-                        anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-                        occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
-                        of them accusamus labore sustainable VHS.
-                    </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingTwo"
+                 data-parent="#accordionSoftware">
+                <div class="card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                    laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                    coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                    anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                    occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard
+                    of them accusamus labore sustainable VHS.
                 </div>
             </div>
+        </div>
     </div>
 {% endblock %}

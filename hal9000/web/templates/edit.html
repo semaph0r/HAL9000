@@ -1,38 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST" class="post-form" action="/update/{{ employee.id }}">
+<form method="POST" class="post-form" action="/update/{{ certificate.id }}">
     {% csrf_token %}
-        <br>
+    <h2>Update Certificate</h2>
         <div class="form-group row">
-            <label class="col-sm-1 col-form-label"></label>
+            <label class="col-sm-2 col-form-label">Domain (FQDN):</label>
             <div class="col-sm-4">
-                <h3>Update Details</h3>
+                <input type="text" name="cert_id" id="cert_id" required maxlength="50" value="{{ certificate.domain }}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Employee Id:</label>
+            <label class="col-sm-2 col-form-label">Maintainer:</label>
             <div class="col-sm-4">
-                <input type="text" name="eid" id="id_eid" required maxlength="20" value="{{ employee.eid }}"/>
+                <input type="text" name="cert_maintainer" id="cert_maintainer" required maxlength="100" value="{{ certificate.maintainer }}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Employee Name:</label>
+            <label class="col-sm-2 col-form-label">Send Notification:</label>
             <div class="col-sm-4">
-                <input type="text" name="ename" id="id_ename" required maxlength="100" value="{{ employee.ename }}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Employee Email:</label>
-            <div class="col-sm-4">
-                <input type="email" name="eemail" id="id_eemail" required maxlength="254"
-                       value="{{ employee.eemail }}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Employee Contact:</label>
-            <div class="col-sm-4">
-                <input type="text" name="econtact" id="id_econtact" required maxlength="15"
-                       value="{{ employee.econtact }}"/>
+                <input type="checkbox" name="cert_notification" id="cert_notification"
+                       value="{{ cert.notify }}"/>
             </div>
         </div>
         <div class="form-group row">

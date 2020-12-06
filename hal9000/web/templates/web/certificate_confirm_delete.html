@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Certificate Monitoring</h2>
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete certificate monitoring for <code>{{ object }}</code> ?</p>
+        <input class="btn btn-primary btn-sm" type="submit" value="Confirm">
+    </form>
+{% endblock %}
