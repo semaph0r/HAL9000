@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Software</h2>
+    {% if data.softwares|length == 0 %}
+        No software tracked.
+    {% else %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Status</th>
+            <th scope="col">Name</th>
+            <th scope="col">Vendor</th>
+            <th scope="col">Maintainer</th>
+            <th scope="col">Notification</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for software in data.softwares %}
+            <tr>
+                <th scope="row">{{ software.status }}</th>
+                <td>{{ software.name }}</td>
+                <td>{{ certificate.vendor }}--></td>
+                <td>{{ certificate.maintainer }}</td>
+                <td>{{ certificate.send_notification|yesno:"Enabled,Disabled" }}</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" href="#" role="button">Acknowledge</a>
+                    <a class="btn btn-primary btn-sm edit" href="#" role="button">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}

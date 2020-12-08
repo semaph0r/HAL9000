@@ -2,7 +2,21 @@ from django import forms
 from .models import Certificate
 
 
-class CertificateForm(forms.ModelForm):
+class CertificateCreateForm(forms.ModelForm):
     class Meta:
         model = Certificate
-        fields = "__all__"
+        fields = [
+            'domain',
+            'maintainer',
+            'send_notification'
+        ]
+
+
+class CertificateUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Certificate
+        fields = [
+            'domain',
+            'maintainer',
+            'send_notification'
+        ]

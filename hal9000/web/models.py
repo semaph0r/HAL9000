@@ -16,7 +16,7 @@ class Certificate(models.Model):
         (ERROR, 'Error'),
         (NA, 'N/A')
     ]
-    domain = models.TextField(validators=[URLValidator()], null=True)
+    domain = models.CharField(max_length=80, validators=[URLValidator()], null=True)
     status = models.CharField(max_length=20,
                               choices=CertificateStatus,
                               default=NA)
@@ -27,6 +27,7 @@ class Certificate(models.Model):
     acknowledged_at = models.DateTimeField(blank=True, null=True)
     acknowledged_by = models.ForeignKey(User, related_name='%(class)s_acknowledge_created', on_delete=models.DO_NOTHING,
                                         blank=True, null=True)
+    expired_at = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.domain

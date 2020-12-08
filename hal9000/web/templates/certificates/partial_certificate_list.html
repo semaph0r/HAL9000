@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Certificates</h2>
+    {% if data.certificates|length == 0 %}
+        No certificates tracked.
+    {% else %}
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Status</th>
+                <th scope="col">FQDN</th>
+                <th scope="col">Valid until</th>
+                <th scope="col">Maintainer</th>
+                <th scope="col">Notification</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for certificate in data.certificates %}
+                <tr>
+                    <th scope="row"><span class="badge badge-secondary">{{ certificate.status }}</span></th>
+                    <td><a href="{{ certificate.domain }}">{{ certificate.domain }}</a></td>
+                    <td><!--{{ certificate.expired_at }}--></td>
+                    <td>{{ certificate.maintainer }}</td>
+                    <td>{{ certificate.send_notification|yesno:"Enabled,Disabled" }}</td>
+                    <td>
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="#">Acknowledge</a>
+                            <a class="dropdown-item" href="{% url 'update-certificate' certificate.id %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'delete-certificate' certificate.id %}">Delete</a>
+                        </div>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
